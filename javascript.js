@@ -24,52 +24,75 @@ function operate(first, operator, second){
 let array = [];
 let previousNumber = "";
 let currentNumber = "";
+let operator = null;
 
 const display = document.querySelector(".display");
 const clear = document.querySelector(".clear").addEventListener("click", () => {
-   return display.innerText = "";
+     display.innerText = "";
+     array = [];
+     currentNumber = "";
+     previousNumber = "";
+     operator = null;
 });
 
 const items = document.querySelector(".items").addEventListener("click", (e) => {
-    const item = e.target.class;
-    if(e.target.classList.contains("numbers")){
-        array.push(e.target.innerText);
-        currentNumber = array.join("");
-        display.innerText = currentNumber;
+    if (e.target.classList.contains("numbers")){
+        array.push(e.target.innerText); 
+        display.innerText = array.join("");
+        currentNumber = display.innerText;
     }
-    else if (e.target.classList.contains("operator")){
-        array = [];
-        previousNumber = currentNumber;
-        let result = operate(Number(previousNumber), e.target.innerText, Number(currentNumber));
+    else if (e.target.classList.contains("operators")){
+        if(!previousNumber){
+            previousNumber = currentNumber;
+            operator = e.target.innerText;
+            array = [];
+            currentNumber = "";
+        }
+        else {
+            let result = operate(Number(previousNumber), operator, Number(currentNumber));
+            display.innerText = result;
+            previousNumber = result;
+            operator = e.target.innerText;
+            array = [];
+            currentNumber = "";
+        }}
+    else if (e.target.classList.contains("equal")){
+        let result = operate(Number(previousNumber), operator, Number(currentNumber));
         display.innerText = result;
-       
-        
-    }
+        array = [];
+        previousNumber = "";
+        currentNumber = "";
+        operator = null;
+    }  
 });
-// const numbers = document.querySelector(".numbers").addEventListener("click", (e) => {
-//     if(!firstNumber){
-//         if (!firstDigit){
-//             firstDigit = e.target.innerText;
-//         }
-//         else if (firstDigit && !secondDigit){
-//             secondDigit = e.target.innerText;
-//         }
-//         firstNumber = `${firstDigit}${secondDigit}`;  
-//         display.innerText = firstNumber;  
-//     }
-//     else {
-//         if (!firstDigit){
-//             firstDigit = e.target.innerText;
-//         }
-//         else if (firstDigit && !secondDigit){
-//             secondDigit = e.target.innerText;
-//         }
-//         secondNumber = `${firstDigit}${secondDigit}`;  
-//         display.innerText = secondNumber;  
-//     }
-//     console.log(`${firstDigit}+${secondDigit}`);
-// });
 
+
+
+
+
+
+// const items = document.querySelector(".items").addEventListener("click", (e) => {
+//     if (e.target.classList.contains("numbers")){
+//         currentNumber += e.target.innerText;
+//         display.innerText = currentNumber;
+//     }
+//     else if (e.target.classList.contains("operators")){
+//         if(!previousNumber){
+//             previousNumber = currentNumber;
+//             operator = e.target.innerText;
+//             currentNumber = "";
+//             display.innerText = "";
+//         }
+//         else if(previousNumber){
+//             let result = operate(Number(previousNumber), operator, Number(currentNumber));
+//             display.innerText = result;
+//             previousNumber = result;
+//             operator = e.target.innerText;
+//             currentNumber = "";
+//         }
+        
+//     }
+// });
 
 
     
