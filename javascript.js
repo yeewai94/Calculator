@@ -58,6 +58,11 @@ const items = document.querySelector(".items").addEventListener("click", (e) => 
             currentNumber = "";
         }}
     else if (e.target.classList.contains("equal")){
+        if(!currentNumber) return;
+        else if(currentNumber && !previousNumber){
+            display.innerText = currentNumber;
+        }
+        else {
         let result = operate(Number(previousNumber), operator, Number(currentNumber));
         result = Number(result).toFixed(2);
         display.innerText = result;
@@ -65,6 +70,7 @@ const items = document.querySelector(".items").addEventListener("click", (e) => 
         previousNumber = "";
         currentNumber = "";
         operator = "";
+        };
     }  
 });
 
