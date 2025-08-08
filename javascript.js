@@ -18,7 +18,10 @@ function operate(first, operator, second){
     if (operator === "+") return add(first, second);
     else if (operator === "-") return subtract(first, second);
     else if (operator === "*") return multiply(first, second);
-    else if (operator === "/") return divide(first, second);
+    else if (operator === "/"){
+        if(second != 0) return divide(first, second);
+        else return alert("ZERO can't be divide you DUMBASS!");
+    }
 }
 
 let array = [];
