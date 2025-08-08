@@ -32,7 +32,7 @@ const clear = document.querySelector(".clear").addEventListener("click", () => {
      array = [];
      currentNumber = "";
      previousNumber = "";
-     operator = null;
+     operator = "";
 });
 
 const items = document.querySelector(".items").addEventListener("click", (e) => {
@@ -50,6 +50,7 @@ const items = document.querySelector(".items").addEventListener("click", (e) => 
         }
         else {
             let result = operate(Number(previousNumber), operator, Number(currentNumber));
+            result = Number(result).toFixed(2);
             display.innerText = result;
             previousNumber = result;
             operator = e.target.innerText;
@@ -58,11 +59,12 @@ const items = document.querySelector(".items").addEventListener("click", (e) => 
         }}
     else if (e.target.classList.contains("equal")){
         let result = operate(Number(previousNumber), operator, Number(currentNumber));
+        result = Number(result).toFixed(2);
         display.innerText = result;
         array = [];
         previousNumber = "";
         currentNumber = "";
-        operator = null;
+        operator = "";
     }  
 });
 
