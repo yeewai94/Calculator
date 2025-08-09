@@ -40,6 +40,10 @@ const clear = document.querySelector(".clear").addEventListener("click", () => {
 
 const items = document.querySelector(".items").addEventListener("click", (e) => {
     if (e.target.classList.contains("numbers")){
+        if (e.target.innerText === "." && currentNumber.includes(".")) return;
+        else if(e.target.innerText === "." && array.length == "0"){
+            array.push("0");
+        }
         array.push(e.target.innerText); 
         display.innerText = array.join("");
         currentNumber = display.innerText;
@@ -66,12 +70,12 @@ const items = document.querySelector(".items").addEventListener("click", (e) => 
             display.innerText = currentNumber;
         }
         else {
-        let result = operate(Number(previousNumber), operator, Number(currentNumber));
+        let result = operate(Number(previousNumber), operator, Number(currentNumber)); 
         result = Number(result).toFixed(2);
         display.innerText = result;
         array = [];
         previousNumber = "";
-        currentNumber = "";
+        currentNumber = result;
         operator = "";
         };
     }  
